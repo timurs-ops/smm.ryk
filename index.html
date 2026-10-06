@@ -277,29 +277,30 @@
     </div>
 
     <script>
-        // 1. Переключение синей рамки
+        // 1. Переключение синей рамки при клике на карточку
         function selectPricing(clickedCard) {
             document.querySelectorAll('.pricing-card').forEach(card => card.classList.remove('selected'));
             clickedCard.classList.add('selected');
         }
 
-        // 2. ЖЕЛЕЗОБЕТОННАЯ ПЕРЕДАЧА ТАРИФА НА ФОРМУ
+        // 2. ПЕРЕДАЧА НАЗВАНИЯ ТАРИФА ВО ВНЕШНЮЮ ФОРМУ
         document.querySelectorAll('.btn-pricing').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function() {
                 const card = this.closest('.pricing-card');
-                const planName = card.querySelector('h3').textContent.trim();
+                const planName = card.querySelector('h3').textContent.trim(); // Light, Medium или Strong
                 
-                // Сохраняем в память браузера (работает 100%)
+                // Способ 1: Сохраняем в localStorage (внешняя форма может прочитать это значение через JS)
                 localStorage.setItem('selectedPlan', planName);
                 
-                // Также добавляем в ссылку на всякий случай
-                const baseUrl = this.getAttribute('href');
-                const separator = baseUrl.includes('?') ? '&' : '?';
-                this.setAttribute('href', baseUrl + separator + 'plan=' + encodeURIComponent(planName));
+                // Способ 2: Добавляем параметр ?plan=... к ссылке для передачи через URL
+                const baseUrl = "https://timurs-ops.github.io/forpost/";
+                this.setAttribute('href', baseUrl + '?plan=' + encodeURIComponent(planName));
+                
+                // После этого браузер автоматически перейдёт по обновлённой ссылке
             });
         });
 
-        // 3. Попап
+        // 3. Попап с контактами (ваш оригинальный)
         function openContactPopup() {
             document.getElementById('contactPopup').classList.add('active');
             document.body.style.overflow = 'hidden';
