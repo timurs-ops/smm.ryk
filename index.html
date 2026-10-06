@@ -17,7 +17,10 @@
         nav a:hover { opacity: 0.8; }
         .btn-nav { background: #fff; color: #1a1a2e; padding: 10px 24px; border-radius: 24px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
         .btn-nav:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-
+        
+        /* Мобильное меню */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+        
         .hero { background: linear-gradient(135deg, #6a0dad 0%, #9b30a0 25%, #c45a8a 45%, #d4845a 65%, #e8a830 85%, #f0c020 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 24px 80px; position: relative; overflow: hidden; text-align: center; }
         .hero-content { max-width: 800px; width: 100%; z-index: 2; position: relative; }
         .hero h1 { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 24px; }
@@ -93,33 +96,67 @@
 
         .contact-popup-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .contact-popup-overlay.active { display: flex; }
-        .contact-popup { background: #fff; border-radius: 20px; padding: 32px; max-width: 380px; width: 100%; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); animation: popupFadeIn 0.25s ease-out; }
+        .contact-popup { background: #fff; border-radius: 20px; padding: 32px; max-width: 420px; width: 100%; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); animation: popupFadeIn 0.25s ease-out; }
         @keyframes popupFadeIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .popup-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: #f0f2f8; border-radius: 50%; cursor: pointer; font-size: 16px; color: #6b7280; transition: background 0.2s, color 0.2s; display: flex; align-items: center; justify-content: center; }
         .popup-close:hover { background: #e5e7eb; color: #1a1a2e; }
         .contact-popup h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
         .contact-popup > p { font-size: 14px; color: #6b7280; margin-bottom: 24px; }
-        .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 12px; background: #f8f9fc; border-radius: 12px; transition: background 0.2s; }
-        .contact-item:hover { background: #f0f2f8; }
-        .contact-icon { font-size: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .contact-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .contact-value { font-size: 17px; font-weight: 600; color: #1a1a2e; text-decoration: none; transition: color 0.2s; }
+        
+        /* Стили для формы в попапе */
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 13px; font-weight: 600; color: #374151; }
+        .form-group input, .form-group textarea { padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 15px; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #2196F3; box-shadow: 0 0 0 3px rgba(33,150,243,0.1); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .selected-plan-badge { background: #e3f2fd; color: #1565c0; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; text-align: center; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-submit { background: #2196F3; color: #fff; padding: 14px; border-radius: 28px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
+        .btn-submit:hover { background: #1976D2; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(33,150,243,0.3); }
+
+        .contact-item { display: flex; align-items: center; gap: 16px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #eef0f4; }
+        .contact-icon { font-size: 20px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #f8f9fc; border-radius: 10px; }
+        .contact-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .contact-value { font-size: 15px; font-weight: 600; color: #1a1a2e; text-decoration: none; transition: color 0.2s; }
         .contact-value:hover { color: #2196F3; }
 
-        @media (max-width: 1024px) { .hero h1 { font-size: 44px; } .principles-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { header { padding: 12px 20px; } nav { gap: 16px; } nav a:not(.btn-nav) { display: none; } section { padding: 60px 20px; } .hero { padding: 100px 20px 60px; } .hero h1 { font-size: 36px; } .section-title { font-size: 28px; } .principles-grid, .steps-grid, .pricing-grid, .testimonials-grid { grid-template-columns: 1fr; } .footer-content { flex-direction: column; gap: 32px; } .footer-links { gap: 32px; } .footer-bottom { flex-direction: column; gap: 8px; } }
-        @media (max-width: 480px) { .hero h1 { font-size: 32px; } .btn-primary { padding: 14px 28px; font-size: 15px; } .pricing-price { font-size: 32px; } }
+        @media (max-width: 1024px) { 
+            .hero h1 { font-size: 44px; } 
+            .principles-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); } 
+        }
+        @media (max-width: 768px) { 
+            header { padding: 12px 20px; } 
+            .mobile-menu-btn { display: block; }
+            nav { position: fixed; top: 60px; left: 0; right: 0; background: #fff; flex-direction: column; padding: 24px; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-150%); transition: transform 0.3s ease; z-index: 999; }
+            nav.active { transform: translateY(0); }
+            nav a { color: #1a1a2e; font-size: 18px; width: 100%; text-align: center; }
+            nav .btn-nav { background: #2196F3; color: #fff; width: 100%; text-align: center; }
+            section { padding: 60px 20px; } 
+            .hero { padding: 100px 20px 60px; } 
+            .hero h1 { font-size: 36px; } 
+            .section-title { font-size: 28px; } 
+            .principles-grid, .steps-grid, .pricing-grid, .testimonials-grid { grid-template-columns: 1fr; } 
+            .footer-content { flex-direction: column; gap: 32px; } 
+            .footer-links { gap: 32px; flex-direction: column; } 
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; } 
+        }
+        @media (max-width: 480px) { 
+            .hero h1 { font-size: 32px; } 
+            .btn-primary { padding: 14px 28px; font-size: 15px; } 
+            .pricing-price { font-size: 32px; } 
+        }
     </style>
 </head>
 <body>
 
     <header>
         <a href="#" class="logo"><div class="logo-circle"></div>Форпост</a>
-        <nav>
-            <a href="#services">Услуги</a>
-            <a href="#testimonials">Отзывы</a>
-            <a href="#about">О нас</a>
-            <button class="btn-nav" onclick="openContactPopup()">Связаться</button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Открыть меню">☰</button>
+        <nav id="mainNav">
+            <a href="#services" onclick="closeMobileMenu()">Услуги</a>
+            <a href="#testimonials" onclick="closeMobileMenu()">Отзывы</a>
+            <a href="#about" onclick="closeMobileMenu()">О нас</a>
+            <button class="btn-nav" onclick="openContactPopup(); closeMobileMenu();">Связаться</button>
         </nav>
     </header>
 
@@ -205,7 +242,7 @@
                         <li>4 поста в месяц</li>
                         <li>Базовая реклама</li>
                     </ul>
-                    <a href="https://timurs-ops.github.io/forpost/" class="btn-pricing">Выбрать</a>
+                    <button class="btn-pricing" data-plan="Light">Выбрать</button>
                 </div>
                 <div class="pricing-card selected" onclick="selectPricing(this)">
                     <h3>Medium</h3>
@@ -216,7 +253,7 @@
                         <li>Таргетированная реклама</li>
                         <li>Комьюнити-менеджмент</li>
                     </ul>
-                    <a href="https://timurs-ops.github.io/forpost/" class="btn-pricing">Выбрать</a>
+                    <button class="btn-pricing" data-plan="Medium">Выбрать</button>
                 </div>
                 <div class="pricing-card" onclick="selectPricing(this)">
                     <h3>Strong</h3>
@@ -227,7 +264,7 @@
                         <li>Безлимитный контент</li>
                         <li>Работа с блогерами</li>
                     </ul>
-                    <a href="https://timurs-ops.github.io/forpost/" class="btn-pricing">Выбрать</a>
+                    <button class="btn-pricing" data-plan="Strong">Выбрать</button>
                 </div>
             </div>
         </div>
@@ -262,22 +299,40 @@
 
     <div class="contact-popup-overlay" id="contactPopup" onclick="closeContactPopup(event)">
         <div class="contact-popup" onclick="event.stopPropagation()">
-            <button class="popup-close" onclick="closeContactPopup()">✕</button>
-            <h3>Свяжитесь с нами</h3>
-            <p>Мы всегда на связи и готовы ответить на ваши вопросы</p>
+            <button class="popup-close" onclick="closeContactPopup()" aria-label="Закрыть">✕</button>
+            <h3>Оставить заявку</h3>
+            <p>Заполните форму, и мы свяжемся с вами в течение 15 минут</p>
+            
+            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="selected-plan-badge" id="planBadge">
+                    <span>📦</span> Выбран тариф: <strong id="selectedPlanText">Не выбран</strong>
+                </div>
+                <input type="hidden" id="planInput" name="plan" value="">
+                
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Комментарий (необязательно)</label>
+                    <textarea id="message" name="message" placeholder="Расскажите кратко о вашей задаче"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Отправить заявку</button>
+            </form>
+
             <div class="contact-item">
                 <div class="contact-icon">📞</div>
-                <div><div class="contact-label">Телефон</div><a href="tel:+74951234567" class="contact-value">+7 (495) 123-45-67</a></div>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">✉️</div>
-                <div><div class="contact-label">Email</div><a href="mailto:hello@forpost.smm" class="contact-value">hello@forpost.smm</a></div>
+                <div><div class="contact-label">Или позвоните нам</div><a href="tel:+74951234567" class="contact-value">+7 (495) 123-45-67</a></div>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Переключение синей рамки
+        // 1. Переключение синей рамки тарифа
         function selectPricing(clickedCard) {
             document.querySelectorAll('.pricing-card').forEach(card => card.classList.remove('selected'));
             clickedCard.classList.add('selected');
@@ -286,32 +341,73 @@
         // 2. ЖЕЛЕЗОБЕТОННАЯ ПЕРЕДАЧА ТАРИФА НА ФОРМУ
         document.querySelectorAll('.btn-pricing').forEach(btn => {
             btn.addEventListener('click', function(e) {
-                const card = this.closest('.pricing-card');
-                const planName = card.querySelector('h3').textContent.trim();
+                e.stopPropagation(); // Предотвращаем всплытие, чтобы не срабатывал клик по карточке дважды
                 
-                // Сохраняем в память браузера (работает 100%)
+                const planName = this.getAttribute('data-plan');
+                
+                // Сохраняем в память браузера
                 localStorage.setItem('selectedPlan', planName);
                 
-                // Также добавляем в ссылку на всякий случай
-                const baseUrl = this.getAttribute('href');
-                const separator = baseUrl.includes('?') ? '&' : '?';
-                this.setAttribute('href', baseUrl + separator + 'plan=' + encodeURIComponent(planName));
+                // Открываем попап
+                openContactPopup();
             });
         });
 
-        // 3. Попап
+        // 3. Обновление формы при открытии попапа
         function openContactPopup() {
-            document.getElementById('contactPopup').classList.add('active');
+            const popup = document.getElementById('contactPopup');
+            popup.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Подхватываем тариф из localStorage или ставим дефолтный
+            const savedPlan = localStorage.getItem('selectedPlan') || 'Не выбран';
+            document.getElementById('selectedPlanText').textContent = savedPlan;
+            document.getElementById('planInput').value = savedPlan;
+            
+            // Если тариф не выбран, скрываем бейдж
+            const badge = document.getElementById('planBadge');
+            if (savedPlan === 'Не выбран') {
+                badge.style.display = 'none';
+            } else {
+                badge.style.display = 'flex';
+            }
         }
+
         function closeContactPopup(event) {
             if (!event || event.target === document.getElementById('contactPopup')) {
                 document.getElementById('contactPopup').classList.remove('active');
                 document.body.style.overflow = '';
             }
         }
+
+        // 4. Обработка отправки формы (заглушка для демонстрации)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Отправленные данные:', data);
+            alert(`Спасибо, ${data.name}! Ваша заявка на тариф "${data.plan}" принята. Мы скоро свяжемся с вами.`);
+            
+            closeContactPopup();
+            event.target.reset();
+            localStorage.removeItem('selectedPlan');
+        }
+
+        // 5. Мобильное меню
+        function toggleMobileMenu() {
+            document.getElementById('mainNav').classList.toggle('active');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mainNav').classList.remove('active');
+        }
+
+        // Закрытие по Escape
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') closeContactPopup();
+            if (event.key === 'Escape') {
+                closeContactPopup();
+                closeMobileMenu();
+            }
         });
     </script>
 </body>
