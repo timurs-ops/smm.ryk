@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /form.html # Если форма не должна индексироваться отдельно
+Sitemap: https://forpostsmm.ru/sitemap.xml
