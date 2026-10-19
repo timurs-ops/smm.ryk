@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форпост — Оставить заявку</title>
+    
+    <!-- SEO ТЕГИ -->
+    <title>Оставить заявку | Форпост — SMM-агентство</title>
+    <meta name="description" content="Оставьте заявку на SMM-продвижение в агентстве Форпост. Мы свяжемся с вами в течение 15 минут для обсуждения деталей проекта.">
+    <link rel="canonical" href="https://forpostsmm.ru/form.html">
+    
+    <!-- Open Graph для соцсетей -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://forpostsmm.ru/form.html">
+    <meta property="og:title" content="Оставить заявку | Форпост SMM">
+    <meta property="og:description" content="Обсудим ваш проект! Заполните форму и мы свяжемся с вами в течение 15 минут.">
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #7b2cbf 0%, #f77f00 100%);
@@ -65,8 +78,12 @@
         }
 
         .form-wrapper h2 { 
-            text-align: center; margin-top: 0; margin-bottom: 30px; 
+            text-align: center; margin-top: 0; margin-bottom: 10px; 
             font-size: 28px; color: var(--text-dark);
+        }
+        .form-subtitle {
+            text-align: center; color: var(--text-gray); font-size: 15px;
+            margin-bottom: 30px;
         }
         .form-group { margin-bottom: 20px; }
         .form-group label { 
@@ -92,6 +109,20 @@
             background-repeat: no-repeat; background-position: right 1rem center; 
             background-size: 1em; cursor: pointer;
         }
+        
+        /* Чекбокс согласия */
+        .checkbox-group {
+            display: flex; align-items: flex-start; gap: 10px;
+            margin: 20px 0; font-size: 13px; color: var(--text-gray);
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 2px; flex-shrink: 0;
+        }
+        .checkbox-group a {
+            color: #7b2cbf; text-decoration: none;
+        }
+        .checkbox-group a:hover { text-decoration: underline; }
+        
         .btn-submit {
             width: 100%; background: var(--primary-gradient); color: white;
             border: none; padding: 16px; border-radius: 12px;
@@ -99,6 +130,21 @@
             margin-top: 10px; transition: opacity 0.3s, transform 0.2s;
         }
         .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        
+        /* Сообщение об успехе */
+        .success-message {
+            display: none; text-align: center; padding: 40px 20px;
+        }
+        .success-message svg {
+            width: 64px; height: 64px; color: #10b981; margin-bottom: 16px;
+        }
+        .success-message h3 {
+            font-size: 24px; margin-bottom: 12px; color: var(--text-dark);
+        }
+        .success-message p {
+            color: var(--text-gray); margin-bottom: 24px;
+        }
         
         @media (max-width: 480px) {
             .header-logo { padding: 20px; }
@@ -132,15 +178,12 @@
         <a href="index.html" class="logo" title="Вернуться на главную">
             <div class="logo-badge">
                 <svg class="logo-svg" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" aria-label="Форпост SMM Агентство">
-                    <!-- Чистая буква F -->
                     <g transform="translate(5, 8)">
                         <path d="M 8 8 L 18 8 L 18 42 L 8 42 Z" fill="url(#logoGrad)"/>
                         <path d="M 8 8 L 42 8 L 38 16 L 8 16 Z" fill="url(#logoGrad)"/>
                         <path d="M 18 24 L 38 24 L 35 32 L 18 32 Z" fill="url(#logoGrad)"/>
                     </g>
-                    <!-- Текст "Форпост" -->
                     <text x="55" y="46" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="url(#textGrad)" letter-spacing="-1">Форпост</text>
-                    <!-- Подпись "SMM АГЕНТСТВО" (увеличена и сделана контрастной для хорошей видимости) -->
                     <text x="57" y="64" font-family="Arial, sans-serif" font-size="14" font-weight="800" fill="#4C1D95" letter-spacing="1">SMM АГЕНТСТВО</text>
                 </svg>
             </div>
@@ -152,75 +195,119 @@
             <!-- КНОПКА НАЗАД -->
             <button type="button" class="btn-back" onclick="window.history.back()">← Назад</button>
             
-            <h2>Обсудить проект</h2>
+            <h2>Обсудим ваш проект?</h2>
+            <p class="form-subtitle">Заполните форму, и мы свяжемся с вами в течение 15 минут в рабочее время</p>
             
             <!-- ФОРМА FORMSPREE -->
-            <form action="https://formspree.io/f/mqpanbwn" method="POST">
+            <form id="contactForm" action="https://formspree.io/f/mqpanbwn" method="POST">
                 <!-- Скрытые поля для Formspree -->
-                <input type="hidden" name="_next" value="https://timurs-ops.github.io/forpost/">
-                <input type="hidden" name="_subject" value="Новая заявка с сайта Форпост!">
+                <input type="hidden" name="_next" value="https://forpostsmm.ru/form.html?success=1">
+                <input type="hidden" name="_subject" value=" Новая заявка с сайта Форпост!">
+                <input type="hidden" name="_template" value="table">
+                
+                <!-- Поле honeypot для защиты от спама -->
+                <input type="text" name="_gotcha" style="display:none">
 
                 <div class="form-group">
-                    <label for="name">Как вас зовут?</label>
+                    <label for="name">Как вас зовут? *</label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Иван Иванов" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Номер телефона</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+                    <label for="phone">Номер телефона или Telegram *</label>
+                    <input type="text" id="phone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00 или @username" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="service">Какая услуга интересует?</label>
-                    <select id="service" name="service" class="form-control" required>
-                        <option value="" disabled selected>Выберите услугу</option>
-                        <option value="Контент-продакшн">Контент-продакшн</option>
-                        <option value="Таргет">Таргетированная реклама</option>
-                        <option value="Блогеры">Работа с блогерами</option>
-                        <option value="Комьюнити">Комьюнити-менеджмент</option>
-                        <option value="Аналитика">Аналитика и отчётность</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tariff">Какой тариф рассматриваете?</label>
+                    <label for="tariff">Какой тариф интересует? *</label>
                     <select id="tariff" name="tariff" class="form-control" required>
                         <option value="" disabled selected>Выберите тариф</option>
-                        <option value="Light">Light</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Strong">Strong</option>
+                        <option value="Light — от 50 000 ₽">Light — от 50 000 ₽</option>
+                        <option value="Medium — от 120 000 ₽">Medium — от 120 000 ₽</option>
+                        <option value="Strong — от 250 000 ₽">Strong — от 250 000 ₽</option>
+                        <option value="Нужна консультация">Нужна консультация</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Комментарий (необязательно)</label>
+                    <label for="service">Какая услуга нужна?</label>
+                    <select id="service" name="service" class="form-control">
+                        <option value="" selected>Пока не определился</option>
+                        <option value="Контент-продакшн">Контент-продакшн</option>
+                        <option value="Таргетированная реклама">Таргетированная реклама</option>
+                        <option value="Работа с блогерами">Работа с блогерами</option>
+                        <option value="Комьюнити-менеджмент">Комьюнити-менеджмент</option>
+                        <option value="Аналитика и отчётность">Аналитика и отчётность</option>
+                        <option value="Комплексное продвижение">Комплексное продвижение</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Комментарий</label>
                     <textarea id="message" name="message" class="form-control" placeholder="Расскажите о вашем проекте, задайте вопрос или опишите пожелания..."></textarea>
                 </div>
 
-                <button type="submit" class="btn-submit">Отправить заявку</button>
+                <!-- Чекбокс согласия -->
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacy" name="privacy" required checked>
+                    <label for="privacy">Я согласен с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и обработкой персональных данных *</label>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Отправить заявку</button>
             </form>
+            
+            <!-- Сообщение об успехе -->
+            <div class="success-message" id="successMessage">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3>Заявка отправлена!</h3>
+                <p>Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+                <a href="index.html" class="btn-back" style="font-size: 16px; padding: 12px 24px;">← Вернуться на главную</a>
+            </div>
         </div>
     </div>
 
     <script>
+        // Автозаполнение тарифа из URL параметра
         document.addEventListener('DOMContentLoaded', function() {
-            // Получаем параметр plan из адресной строки (например, ?plan=Medium)
             const urlParams = new URLSearchParams(window.location.search);
             const planName = urlParams.get('plan');
-
-            if (planName) {
-                const selects = document.querySelectorAll('select');
-                selects.forEach(select => {
-                    for (let i = 0; i < select.options.length; i++) {
-                        if (select.options[i].text.toLowerCase() === planName.toLowerCase() || 
-                            select.options[i].value.toLowerCase() === planName.toLowerCase()) {
-                            select.selectedIndex = i;
-                            select.dispatchEvent(new Event('change', { bubbles: true }));
-                            break;
-                        }
-                    }
-                });
+            const successParam = urlParams.get('success');
+            
+            // Показываем сообщение об успехе если есть параметр success
+            if (successParam === '1') {
+                document.querySelector('form').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                document.querySelector('.form-subtitle').style.display = 'none';
             }
+
+            // Автозаполнение тарифа
+            if (planName) {
+                const tariffSelect = document.getElementById('tariff');
+                
+                // Ищем совпадение по ключевым словам
+                const planLower = planName.toLowerCase();
+                for (let i = 0; i < tariffSelect.options.length; i++) {
+                    const optionText = tariffSelect.options[i].text.toLowerCase();
+                    const optionValue = tariffSelect.options[i].value.toLowerCase();
+                    
+                    if (optionText.includes(planLower) || optionValue.includes(planLower) ||
+                        planLower.includes('light') && optionText.includes('light') ||
+                        planLower.includes('medium') && optionText.includes('medium') ||
+                        planLower.includes('strong') && optionText.includes('strong')) {
+                        tariffSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        });
+        
+        // Обработка отправки формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
         });
     </script>
 </body>
