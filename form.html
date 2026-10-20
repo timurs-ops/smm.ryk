@@ -301,6 +301,55 @@
                     }
                 }
             }
+
+            /* =========================================================
+               НОВАЯ ФУНКЦИЯ: МАСКА ВВОДА НОМЕРА ТЕЛЕФОНА
+               Автоматически добавляет скобки и дефисы при вводе
+               ========================================================= */
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    // Оставляем только цифры
+                    let val = this.value.replace(/\D/g, '');
+                    let formattedValue = '';
+                    
+                    if (!val) {
+                        this.value = '';
+                        return;
+                    }
+                    
+                    // Если начали с 9, подставляем 7. Если с 8, оставляем 8 (или меняем на 7)
+                    if (['7', '8', '9'].indexOf(val[0]) > -1) {
+                        if (val[0] === '9') val = '7' + val;
+                        const firstSymbols = (val[0] === '8') ? '8' : '7';
+                        formattedValue = '+' + firstSymbols + ' ';
+                        if (val.length > 1) {
+                            formattedValue += '(' + val.substring(1, 4);
+                        }
+                        if (val.length >= 5) {
+                            formattedValue += ') ' + val.substring(4, 7);
+                        }
+                        if (val.length >= 8) {
+                            formattedValue += '-' + val.substring(7, 9);
+                        }
+                        if (val.length >= 10) {
+                            formattedValue += '-' + val.substring(9, 11);
+                        }
+                    } else {
+                        formattedValue = '+' + val.substring(0, 16);
+                    }
+                    
+                    this.value = formattedValue;
+                });
+
+                // Корректная работа клавиши Backspace для полной очистки маски
+                phoneInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value.length <= 4) {
+                        this.value = '';
+                    }
+                });
+            }
+            /* ========================================================= */
         });
         
         // Обработка отправки формы
