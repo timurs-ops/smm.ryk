@@ -7,90 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форпост — SMM-агентство</title>
     <style>
-    /* Стили для социального бокса VK */
-.social-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    background: #ffffff;
-    border-radius: 14px;
-    text-decoration: none !important; /* Убираем подчеркивание ссылки */
-    color: var(--text-dark);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-    margin-top: 15px; /* Отступ от Email выше */
-}
-
-.social-box:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #0077ff 0%, #005bc1 100%); /* Фирменный синий VK */
-    color: white;
-}
-
-/* Иконка */
-.social-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: #0077ff; /* Цвет иконки по умолчанию */
-    transition: fill 0.3s ease;
-}
-.social-box:hover .social-icon svg {
-    fill: white; /* Меняем цвет иконки на белый при наведении */
-}
-
-/* Текст */
-.social-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-}
-.social-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 2px;
-}
-.social-desc {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-/* Стрелка */
-.social-arrow {
-    margin-left: auto;
-    font-size: 18px;
-    opacity: 0.5;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.social-box:hover .social-arrow {
-    opacity: 1;
-    transform: translateX(3px);
-}
-/* Белые боксы для телефона и почты */
-.contact-box {
-    background: #ffffff;
-    border-radius: 14px; /* Скругление углов */
-    padding: 16px 20px; /* Внутренние отступы */
-    margin-bottom: 12px; /* Расстояние между боксами */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Легкая тень */
-    transition: all 0.3s ease; /* Плавность при наведении */
-    border: 1px solid transparent; /* Прозрачная рамка по умолчанию */
-}
-
-/* Эффект при наведении мышкой */
-.contact-box:hover {
-    transform: translateY(-3px); /* Приподнимаем вверх */
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1); /* Тень становится сильнее */
-    border-color: #e5e7eb; /* Появляется тонкая серая рамка */
-}
-
-/* Убираем лишние отступы у внутренних элементов, чтобы они лежали плотно */
-.contact-box .contact-item {
-    margin: 0 !important;
-    padding: 0 !important;
-}
+   
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; background: #f5f6fa; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -253,6 +170,7 @@
         .footer-col a:hover { color: #fff; }
         .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.4); }
 
+        /* Стили для попапов */
         .contact-popup-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
         .contact-popup-overlay.active { display: flex; }
         .contact-popup { background: #fff; border-radius: 20px; padding: 32px; max-width: 380px; width: 100%; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.15); animation: popupFadeIn 0.25s ease-out; }
@@ -261,12 +179,85 @@
         .popup-close:hover { background: #e5e7eb; color: #1a1a2e; }
         .contact-popup h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
         .contact-popup > p { font-size: 14px; color: #6b7280; margin-bottom: 24px; }
-        .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 12px; background: #f8f9fc; border-radius: 12px; transition: background 0.2s; }
-        .contact-item:hover { background: #f0f2f8; }
-        .contact-icon { font-size: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .contact-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .contact-value { font-size: 17px; font-weight: 600; color: #1a1a2e; text-decoration: none; transition: color 0.2s; }
-        .contact-value:hover { color: #2196F3; }
+        
+        /* Карточки контактов внутри попапа */
+        .contacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .drop-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            text-decoration: none !important;
+            color: inherit;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .drop-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: transparent;
+        }
+        .drop-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+        .phone-bg { background: linear-gradient(135deg, #10b981, #059669); }
+        .mail-bg { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .vk-bg { background: linear-gradient(135deg, #0077ff, #005bc1); }
+        
+        .drop-text-group {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .drop-text-group small {
+            font-size: 11px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        .drop-text-group strong {
+            font-size: 15px;
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .card-arrow {
+            margin-left: auto;
+            opacity: 0.3;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+        .drop-item:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* Ховер для ВК строки */
+        .drop-item.vk-hover:hover {
+            background: #eff6ff;
+        }
+        .drop-item.vk-hover:hover .drop-icon {
+             background: white;
+             border: 2px solid #0077ff;
+        }
+        .drop-item.vk-hover:hover .drop-icon svg {
+             fill: #0077ff;
+        }
 
         @media (max-width: 1024px) { 
             .hero h1 { font-size: 44px; } 
@@ -360,7 +351,8 @@
             <a href="#services">Услуги</a>
             <a href="#" onclick="openCommentPopup(); return false;">Отзывы</a>
             <a href="#about">О нас</a>
-            <a href="form.html" class="btn-nav" onclick="openContactPopup(); return false;">Связаться с нами</a>
+            <!-- Кнопка вызывает попап контактов -->
+            <a href="#" class="btn-nav" onclick="openContactPopup(); return false;">Связаться с нами</a>
         </nav>
     </header>
 
@@ -496,7 +488,7 @@
                     <h4>Компания</h4>
                     <a href="#about">О нас</a>
                     <a href="#testimonials">Кейсы</a>
-                    <a href="form.html" onclick="openContactPopup(); return false;">Контакты</a>
+                    <a href="#" onclick="openContactPopup(); return false;">Контакты</a>
                 </div>
             </div>
         </div>
@@ -506,46 +498,46 @@
         </div>
     </footer>
 
-<!-- Бокс для Телефона -->
-<div class="contact-box">
-    <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div>
-            <div class="contact-label">Телефон</div>
-            <a href="tel:+79990000000" class="contact-value">+7 (996) 984-17-98</a>
-        </div>
-    </div>
-</div>
+    <!-- Попап "Связаться с нами" -->
+    <div class="contact-popup-overlay" id="contactPopup" onclick="closeContactPopup(event)">
+        <div class="contact-popup" onclick="event.stopPropagation()">
+            <button class="popup-close" onclick="closeContactPopup()">✕</button>
+            <h3>Свяжитесь с нами</h3>
+            <p>Выберите удобный способ связи</p>
+            
+            <div class="contacts-list">
+                <!-- Телефон -->
+                <a href="tel:+79990000000" class="drop-item">
+                    <div class="drop-icon phone-bg">📞</div>
+                    <div class="drop-text-group">
+                        <small>Телефон</small>
+                        <strong>+7 (999) 000-00-00</strong>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-<!-- Бокс для Email -->
-<div class="contact-box">
-    <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div>
-            <div class="contact-label">Email</div>
-            <a href="mailto:for.post.smm@gmail.com" class="contact-value">for.post.smm@gmail.com</a>
-        </div>
-    </div>
-</div>
+                <!-- Email -->
+                <a href="mailto:for.post.smm@gmail.com" class="drop-item">
+                    <div class="drop-icon mail-bg">✉️</div>
+                    <div class="drop-text-group">
+                        <small>Email</small>
+                        <strong>for.post.smm@gmail.com</strong>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-<!-- Ваш бокс VK остается как есть (он уже использует .social-box) -->
-<a href="https://vk.ru/club242058983" target="_blank" class="social-box vk-box">
-   ... ваш код VK ...
-</a>
-            <!-- Ссылка на ВКонтакте (Бокс) -->
-<a href="https://vk.ru/club242058983" target="_blank" class="social-box vk-box">
-    <div class="social-icon">
-        <!-- SVG Иконка VK -->
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.525-2.049-1.714-1.033-1.01-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.836 0-3.876-1.102-5.307-3.146C4.697 11.028 4.01 8.62 4.01 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.913 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.407-.407h2.744c.356 0 .475.17.475.542v3.711c0 .356.153.475.254.475.22 0 .407-.119.813-.525 1.253-1.406 2.15-3.58 2.15-3.58.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.644-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.17.254.728.711 1.102 1.135.678.763 1.203 1.406 1.355 1.862.153.475-.068.711-.542.711z"/>
-        </svg>
-    </div>
-    <div class="social-text">
-        <span class="social-title">ВКонтакте</span>
-        <span class="social-desc">Подписаться на новости</span>
-    </div>
-    <div class="social-arrow">→</div>
-</a>
+                <!-- ВКонтакте -->
+                <a href="https://vk.com/ваш_никнейм_группы" target="_blank" class="drop-item vk-hover">
+                    <div class="drop-icon vk-bg">
+                         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.525-2.049-1.714-1.033-1.01-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.836 0-3.876-1.102-5.307-3.146C4.697 11.028 4.01 8.62 4.01 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.913 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.407-.407h2.744c.356 0 .475.17.475.542v3.711c0 .356.153.475.254.475.22 0 .407-.119.813-.525 1.253-1.406 2.15-3.58 2.15-3.58.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.644-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.17.254.728.711 1.102 1.135.678.763 1.203 1.406 1.355 1.862.153.475-.068.711-.542.711z"/></svg>
+                    </div>
+                    <div class="drop-text-group">
+                        <small>Соцсети</small>
+                        <strong>ВКонтакте</strong>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -666,7 +658,7 @@
             });
         });
 
-        // 3. Попап с контактами
+        // 3. Попап с контактами (Новая реализация)
         function openContactPopup() {
             document.getElementById('contactPopup').classList.add('active');
             document.body.style.overflow = 'hidden';
