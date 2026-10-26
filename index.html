@@ -7,6 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форпост — SMM-агентство</title>
     <style>
+    /* Стили для социального бокса VK */
+.social-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: #ffffff;
+    border-radius: 14px;
+    text-decoration: none !important; /* Убираем подчеркивание ссылки */
+    color: var(--text-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    margin-top: 15px; /* Отступ от Email выше */
+}
+
+.social-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #0077ff 0%, #005bc1 100%); /* Фирменный синий VK */
+    color: white;
+}
+
+/* Иконка */
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #0077ff; /* Цвет иконки по умолчанию */
+    transition: fill 0.3s ease;
+}
+.social-box:hover .social-icon svg {
+    fill: white; /* Меняем цвет иконки на белый при наведении */
+}
+
+/* Текст */
+.social-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.social-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+.social-desc {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* Стрелка */
+.social-arrow {
+    margin-left: auto;
+    font-size: 18px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.social-box:hover .social-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; background: #f5f6fa; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -436,6 +497,20 @@
                 <div class="contact-icon">✉️</div>
                 <div><div class="contact-label">Email</div><a href="mailto:hello@forpost.smm" class="contact-value">for.post.smm@gmail.com</a></div>
             </div>
+            <!-- Ссылка на ВКонтакте (Бокс) -->
+<a href="https://vk.ru/club242058983" target="_blank" class="social-box vk-box">
+    <div class="social-icon">
+        <!-- SVG Иконка VK -->
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.525-2.049-1.714-1.033-1.01-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.836 0-3.876-1.102-5.307-3.146C4.697 11.028 4.01 8.62 4.01 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.913 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.407-.407h2.744c.356 0 .475.17.475.542v3.711c0 .356.153.475.254.475.22 0 .407-.119.813-.525 1.253-1.406 2.15-3.58 2.15-3.58.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.644-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.17.254.728.711 1.102 1.135.678.763 1.203 1.406 1.355 1.862.153.475-.068.711-.542.711z"/>
+        </svg>
+    </div>
+    <div class="social-text">
+        <span class="social-title">ВКонтакте</span>
+        <span class="social-desc">Подписаться на новости</span>
+    </div>
+    <div class="social-arrow">→</div>
+</a>
         </div>
     </div>
 
