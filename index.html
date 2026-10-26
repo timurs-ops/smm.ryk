@@ -68,62 +68,28 @@
     opacity: 1;
     transform: translateX(3px);
 }
-        /* Общие стили для карточек контакта */
-.contact-card {
-    background: #ffffff !important; /* Принудительно белый фон */
-    border: 1px solid #e5e7eb; /* Легкая рамка, чтобы было видно на белом фоне сайта */
-    margin-bottom: 12px; /* Расстояние между карточками */
+/* Белые боксы для телефона и почты */
+.contact-box {
+    background: #ffffff;
+    border-radius: 14px; /* Скругление углов */
+    padding: 16px 20px; /* Внутренние отступы */
+    margin-bottom: 12px; /* Расстояние между боксами */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Легкая тень */
+    transition: all 0.3s ease; /* Плавность при наведении */
+    border: 1px solid transparent; /* Прозрачная рамка по умолчанию */
 }
 
-/* При наведении — легкий серый оттенок вместо градиента (для телефона/почты это аккуратнее) */
-.contact-card:hover {
-    background: #f9fafb !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+/* Эффект при наведении мышкой */
+.contact-box:hover {
+    transform: translateY(-3px); /* Приподнимаем вверх */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1); /* Тень становится сильнее */
+    border-color: #e5e7eb; /* Появляется тонкая серая рамка */
 }
 
-/* Стилизация кружка с иконкой */
-.icon-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: white;
-    flex-shrink: 0;
-}
-
-.phone-bg {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Зеленый для звонка */
-}
-
-.mail-bg {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); /* Оранжевый для почты (под ваш бренд) */
-}
-
-/* Ссылки внутри карточек */
-.social-link {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 14px;
-    transition: color 0.2s;
-}
-
-.social-link:hover {
-    color: #7b2cbf; /* Фиолетовый при наведении */
-}
-
-/* Адаптив: убираем стрелку на мобильных, если тесно */
-@media (max-width: 480px) {
-    .social-arrow {
-        display: none;
-    }
-    .contact-card {
-        padding: 12px 16px;
-    }
+/* Убираем лишние отступы у внутренних элементов, чтобы они лежали плотно */
+.contact-box .contact-item {
+    margin: 0 !important;
+    padding: 0 !important;
 }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a2e; background: #f5f6fa; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
@@ -540,24 +506,32 @@
         </div>
     </footer>
 
-    <!-- Стало (Белые боксы) -->
-<div class="social-box contact-card">
-    <div class="social-icon icon-circle phone-bg">📞</div>
-    <div class="social-text">
-        <span class="social-title">Позвонить нам</span>
-        <a href="tel:+79969841798" class="social-link">+7 (996) 984-17-98</a>
+<!-- Бокс для Телефона -->
+<div class="contact-box">
+    <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+            <div class="contact-label">Телефон</div>
+            <a href="tel:+79990000000" class="contact-value">+7 (996) 984-17-98</a>
+        </div>
     </div>
-    <div class="social-arrow">→</div>
 </div>
 
-<div class="social-box contact-card">
-    <div class="social-icon icon-circle mail-bg">✉️</div>
-    <div class="social-text">
-        <span class="social-title">Написать на почту</span>
-        <a href="mailto:for.post.smm@gmail.com" class="social-link">for.post.smm@gmail.com</a>
+<!-- Бокс для Email -->
+<div class="contact-box">
+    <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+            <div class="contact-label">Email</div>
+            <a href="mailto:for.post.smm@gmail.com" class="contact-value">for.post.smm@gmail.com</a>
+        </div>
     </div>
-    <div class="social-arrow">→</div>
 </div>
+
+<!-- Ваш бокс VK остается как есть (он уже использует .social-box) -->
+<a href="https://vk.ru/club242058983" target="_blank" class="social-box vk-box">
+   ... ваш код VK ...
+</a>
             <!-- Ссылка на ВКонтакте (Бокс) -->
 <a href="https://vk.ru/club242058983" target="_blank" class="social-box vk-box">
     <div class="social-icon">
