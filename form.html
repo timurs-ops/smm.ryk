@@ -198,24 +198,17 @@
             <h2>Обсудим ваш проект?</h2>
             <p class="form-subtitle">Заполните форму, и мы свяжемся с вами в течение 15 минут в рабочее время</p>
             
-            <!-- ФОРМА FORMSPREE -->
-            <form id="contactForm" action="https://formspree.io/f/mqpanbwn" method="POST">
-                <!-- Скрытые поля для Formspree -->
-                <input type="hidden" name="_next" value="https://forpostsmm.ru/form.html?success=1">
-                <input type="hidden" name="_subject" value=" Новая заявка с сайта Форпост!">
-                <input type="hidden" name="_template" value="table">
+            <!-- ФОРМА ДЛЯ TELEGRAM (БЕЗ FORMSPREE) -->
+            <form id="contactForm">
                 
-                <!-- Поле honeypot для защиты от спама -->
-                <input type="text" name="_gotcha" style="display:none">
-
                 <div class="form-group">
                     <label for="name">Как вас зовут? *</label>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Иван Иванов" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Номер телефона</label>
-                    <input type="text" id="phone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
+                    <label for="phone">Номер телефона *</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (999) 000-00-00" required>
                 </div>
 
                 <div class="form-group">
@@ -273,20 +266,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const planName = urlParams.get('plan');
-            const successParam = urlParams.get('success');
             
-            // Показываем сообщение об успехе если есть параметр success
-            if (successParam === '1') {
-                document.querySelector('form').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                document.querySelector('.form-subtitle').style.display = 'none';
-            }
-
             // Автозаполнение тарифа
             if (planName) {
                 const tariffSelect = document.getElementById('tariff');
-                
-                // Ищем совпадение по ключевым словам
                 const planLower = planName.toLowerCase();
                 for (let i = 0; i < tariffSelect.options.length; i++) {
                     const optionText = tariffSelect.options[i].text.toLowerCase();
@@ -302,14 +285,10 @@
                 }
             }
 
-            /* =========================================================
-               НОВАЯ ФУНКЦИЯ: МАСКА ВВОДА НОМЕРА ТЕЛЕФОНА
-               Автоматически добавляет скобки и дефисы при вводе
-               ========================================================= */
+            /* МАСКА ВВОДА НОМЕРА ТЕЛЕФОНА */
             const phoneInput = document.getElementById('phone');
             if (phoneInput) {
                 phoneInput.addEventListener('input', function(e) {
-                    // Оставляем только цифры
                     let val = this.value.replace(/\D/g, '');
                     let formattedValue = '';
                     
@@ -318,7 +297,6 @@
                         return;
                     }
                     
-                    // Если начали с 9, подставляем 7. Если с 8, оставляем 8 (или меняем на 7)
                     if (['7', '8', '9'].indexOf(val[0]) > -1) {
                         if (val[0] === '9') val = '7' + val;
                         const firstSymbols = (val[0] === '8') ? '8' : '7';
@@ -342,22 +320,67 @@
                     this.value = formattedValue;
                 });
 
-                // Корректная работа клавиши Backspace для полной очистки маски
                 phoneInput.addEventListener('keydown', function(e) {
                     if (e.key === 'Backspace' && this.value.length <= 4) {
                         this.value = '';
                     }
                 });
             }
-            /* ========================================================= */
         });
         
-        // Обработка отправки формы
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // ОБРАБОТКА ОТПРАВКИ ФОРМЫ ЧЕРЕЗ CLOUDFLARE WORKER
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
             const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.textContent;
+            
             submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
-            ym(113769508, 'reachGoal', 'form_submit');
+
+            // Сбор данных формы
+            const formData = new FormData(this);
+            const payload = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                plan: formData.get('tariff'),
+                service: formData.get('service'),
+                message: formData.get('message')
+            };
+
+            try {
+                // ❗️ ВАШ URL WORKER'A
+                const workerUrl = 'https://smm-forpost-proxy.timurzivoderovs.workers.dev'; 
+                
+                const response = await fetch(workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Показываем экран успеха
+                    document.querySelector('form').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.querySelector('.form-subtitle').style.display = 'none';
+                    
+                    // Отправляем цель в Яндекс.Метрику
+                    if(typeof ym !== 'undefined') {
+                        ym(113769508, 'reachGoal', 'form_submit');
+                    }
+                } else {
+                    throw new Error(result.error || 'Ошибка отправки');
+                }
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('❌ Не удалось отправить заявку. Пожалуйста, попробуйте позже или напишите нам напрямую.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
     <!-- Yandex.Metrika counter -->
