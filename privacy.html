@@ -4,44 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Политика конфиденциальности | Форпост</title>
-    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #374151; background: #f5f6fa; line-height: 1.7; padding: 40px 24px; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 48px; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-        h1 { font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 24px; }
-        h2 { font-size: 18px; font-weight: 700; color: #1a1a2e; margin-top: 32px; margin-bottom: 12px; }
-        p { margin-bottom: 16px; font-size: 15px; }
-        ul { margin-bottom: 16px; padding-left: 24px; font-size: 15px; }
-        li { margin-bottom: 8px; }
-        .back-link { display: inline-block; margin-bottom: 24px; color: #2196F3; text-decoration: none; font-weight: 600; font-size: 15px; }
-        .back-link:hover { text-decoration: underline; }
-        @media (max-width: 600px) { .container { padding: 24px; } }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7b2cbf 0%, #f77f00 100%);
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --white: #ffffff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 0;
+            background: #f5f6fa;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .header-logo { padding: 24px 40px; background: var(--primary-gradient); }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo-badge {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 18px 10px 10px;
+            border-radius: 12px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .logo-svg { height: 44px; width: auto; display: block; }
+        
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .content-box {
+            background: var(--white); padding: 40px; border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 { font-size: 28px; margin-bottom: 24px; color: var(--text-dark); }
+        h2 { font-size: 20px; margin-top: 30px; margin-bottom: 12px; color: var(--text-dark); }
+        p, li { color: var(--text-gray); font-size: 15px; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--primary-gradient); color: white;
+            font-size: 14px; font-weight: 600; padding: 12px 24px;
+            border-radius: 20px; text-decoration: none; margin-top: 30px;
+            transition: opacity 0.2s;
+        }
+        .btn-back:hover { opacity: 0.9; }
+        @media (max-width: 480px) {
+            .header-logo { padding: 20px; }
+            .logo-svg { height: 36px; }
+            .content-box { padding: 24px; }
+        }
     </style>
 </head>
 <body>
+
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7C3AED"/>
+                <stop offset="50%" stop-color="#A855F7"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+            </linearGradient>
+            <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7C3AED"/>
+                <stop offset="50%" stop-color="#A855F7"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="header-logo">
+        <a href="index.html" class="logo">
+            <div class="logo-badge">
+                <svg class="logo-svg" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(5, 8)">
+                        <path d="M 8 8 L 18 8 L 18 42 L 8 42 Z" fill="url(#logoGrad)"/>
+                        <path d="M 8 8 L 42 8 L 38 16 L 8 16 Z" fill="url(#logoGrad)"/>
+                        <path d="M 18 24 L 38 24 L 35 32 L 18 32 Z" fill="url(#logoGrad)"/>
+                    </g>
+                    <text x="55" y="46" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="url(#textGrad)" letter-spacing="-1">Форпост</text>
+                    <text x="57" y="64" font-family="Arial, sans-serif" font-size="14" font-weight="800" fill="#4C1D95" letter-spacing="1">SMM АГЕНТСТВО</text>
+                </svg>
+            </div>
+        </a>
+    </div>
+
     <div class="container">
-        <a href="/" class="back-link">← Вернуться на сайт</a>
-        <h1>Политика конфиденциальности</h1>
-        <p>Настоящая Политика конфиденциальности персональных данных (далее – Политика) действует в отношении всей информации, которую сайт «Форпост» (forpostsmm.ru) может получить о пользователе во время использования сайта.</p>
-        
-        <h2>1. Сбор персональных данных</h2>
-        <p>Мы собираем только те данные, которые вы добровольно предоставляете нам через форму заявки: имя, контактный телефон или никнейм в Telegram, а также текст сообщения.</p>
-        
-        <h2>2. Цели сбора данных</h2>
-        <ul>
-            <li>Связь с пользователем для обсуждения деталей сотрудничества;</li>
-            <li>Предоставление услуг по продвижению в социальных сетях;</li>
-            <li>Улучшение качества обслуживания и работы сайта.</li>
-        </ul>
+        <div class="content-box">
+            <h1>Политика конфиденциальности</h1>
+            <p>Настоящая Политика конфиденциальности регулирует порядок обработки и использования персональных данных пользователей сайта <strong>forpostsmm.ru</strong> (далее — Сайт).</p>
+            
+            <h2>1. Какие данные мы собираем</h2>
+            <p>Мы можем собирать следующие персональные данные, которые вы добровольно предоставляете при заполнении форм на Сайте:</p>
+            <ul>
+                <li>Имя и фамилия;</li>
+                <li>Номер телефона;</li>
+                <li>Никнейм в Telegram;</li>
+                <li>Текст сообщения (комментарий к заявке).</li>
+            </ul>
 
-        <h2>3. Защита данных</h2>
-        <p>Мы принимаем все необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения или блокирования.</p>
+            <h2>2. Цели сбора данных</h2>
+            <p>Ваши данные используются исключительно для:</p>
+            <ul>
+                <li>Обработки входящих заявок и связи с вами для обсуждения деталей проекта;</li>
+                <li>Предоставления услуг SMM-продвижения;</li>
+                <li>Улучшения качества обслуживания и работы Сайта.</li>
+            </ul>
 
-        <h2>4. Контакты</h2>
-        <p>По всем вопросам, связанным с обработкой ваших персональных данных, вы можете связаться с нами по электронной почте: for.post.smm@gmail.com</p>
-        
-        <p style="margin-top: 40px; color: #9ca3af; font-size: 13px;">Последнее обновление: 20 октября 2026 г.</p>
+            <h2>3. Защита данных</h2>
+            <p>Мы принимаем все необходимые организационные и технические меры для защиты ваших персональных данных от неправомерного или случайного доступа, уничтожения, изменения или распространения. Мы не передаем ваши данные третьим лицам, за исключением случаев, предусмотренных законодательством РФ (включая ФЗ-152 «О персональных данных»).</p>
+
+            <h2>4. Ваши права</h2>
+            <p>Вы имеете право в любой момент отозвать свое согласие на обработку персональных данных, а также потребовать их удаления. Для этого свяжитесь с нами по электронной почте: <strong>for.post.smm@gmail.com</strong>.</p>
+
+            <h2>5. Контактная информация</h2>
+            <p>По всем вопросам, связанным с настоящей Политикой, вы можете связаться с нами по указанному выше email.</p>
+
+            <a href="form.html" class="btn-back">← Вернуться к форме заявки</a>
+        </div>
     </div>
 </body>
 </html>
